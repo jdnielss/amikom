@@ -5,6 +5,8 @@ import { View, Text, StyleSheet } from 'react-native';
 // create a component
 class MyClass extends Component {
   render() {
+    let SQLite = require('react-native-sqlite-storage')
+
     return (
       <View style={styles.container}>
         <Text>MyClass</Text>
