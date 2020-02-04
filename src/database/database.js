@@ -68,57 +68,26 @@ export default class Database {
             console.log('Database Was Not Openeded')
         }
     }
-    // List Of Users
-    // users(){
-    //     return new Promise((resolve, reject) => {
-    //         const users = [];
-    //         this.initDB().then((db) => {
-    //             db.transaction((tx) => {
-    //                 tx.executeSql('SELECT * from users', []).then(([tx, results]) => {
-    //                     console.log('QUERY COMPLETED')
-    //                     let length = results.rows.length;
-    //                     for(let i = 0; i < length; i++) {
-    //                         let row = results.rows.item(i);
-    //                         console.log(`User :  $(row.userName)`)
-    //                         const {userId, userName} = row
-    //                         users.push({
-    //                             userId, userName
-    //                         });
-    //                     }
-    //                     console.log(users);
-    //                     resolve(users);
-    //                 }) ;
-    //             }).then((result) => {
-    //                 this.closeDatabase(db);
-    //             }).catch((error) => {
-    //                 console.log('Error',error)
-    //             });
-    //         });
-    //     }).catch((error) => {
-    //         console.log('Error 2',error)
-    //     })
-    // }
 
     users() {
         return new Promise((resolve) => {
-          const products = [];
+          const users = [];
           this.initDB().then((db) => {
             db.transaction((tx) => {
-              tx.executeSql('SELECT * FROM users ', []).then(([tx,results]) => {
+              tx.executeSql('SELECT * FROM users', []).then(([tx,results]) => {
                 console.log("Query completed");
                 var len = results.rows.length;
                 for (let i = 0; i < len; i++) {
                   let row = results.rows.item(i);
-                //   console.log(`Prod ID: ${row.userId}, Prod Name: ${row.userName},`)
+                  console.log(`Prod ID: ${row.userId}, Prod Name: ${row.userName}`)
                   const { userId, userName } = row;
-                  products.push({
-                    prodId,
-                    prodName,
-                    prodImage
+                  users.push({
+                    userId, 
+                    userName
                   });
                 }
-                // console.log(products);
-                resolve(products);
+                console.log(users);
+                resolve(users);
               });
             }).then((result) => {
               this.closeDatabase(db);
@@ -131,11 +100,11 @@ export default class Database {
         });  
       }
 
-    createUser(prod) {
+    createUser(user) {
         return new Promise((resolve) => {
           this.initDB().then((db) => {
             db.transaction((tx) => {
-              tx.executeSql('INSERT INTO users VALUES (?, ?)', [prod.userId, prod.userName]).then(([tx, results]) => {
+              tx.executeSql('INSERT INTO users VALUES (?, ?)', [user.userId, user.userName]).then(([tx, results]) => {
                 resolve(results);
               });
             }).then((result) => {

@@ -22,7 +22,7 @@ class AddUser extends Component {
             // userId: this.state.userId,
             userName: this.state.userName
         }
-        for (let i = 1; i <= 500; i++) {
+        for (let i = 1; i <= 10; i++) {
             try {
                 user.userId = i;
                 const result = await db.createUser(user);
@@ -58,6 +58,7 @@ class AddUser extends Component {
                 </View>
                 <View>
                     <Button size="large" title="Save" onPress={() => this.saveUser()}/>
+                    <Button size="large" title="Save" onPress={() => {this.props.navigation.navigate('Users')}}/>
                 </View>
             </>
         )
