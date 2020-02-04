@@ -28,7 +28,7 @@ export default class Database {
                 .then((DB) => { 
                     db = DB;
                     console.log('Database open');
-                    db.executeSql('SELECT 1 FROM users LIMIT 1').then(() => {
+                    db.executeSql('SELECT * FROM users').then(() => {
                         console.log('Database Ready');
                     }).catch((error) => {
                         console.log('Recieved Error', error);
@@ -62,7 +62,7 @@ export default class Database {
                     console.log('DB Closed')
                 })
                 .catch((error) =>{
-                    this.errorCB(error)
+                    console.log(error, 'Close Database failed')
                 });
         }else{
             console.log('Database Was Not Openeded')

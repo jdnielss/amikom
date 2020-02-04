@@ -59,6 +59,7 @@ class User extends Component {
             <ListItem 
                 key={index}
                 title={item.userName}
+                subtitle={item.userId}
                 bottomDivider
             />
         )
