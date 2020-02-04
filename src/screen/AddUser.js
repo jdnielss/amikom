@@ -22,7 +22,7 @@ class AddUser extends Component {
             // userId: this.state.userId,
             userName: this.state.userName
         }
-        for (let i = 1; i <= 10; i++) {
+        for (let i = 1; i < 10; i++) {
             try {
                 user.userId = i;
                 const result = await db.createUser(user);
@@ -37,6 +37,8 @@ class AddUser extends Component {
             }
         }
     }
+
+    
 
     updateText = (text, field) => {
         // this.state[field] = text;

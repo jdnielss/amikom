@@ -28,7 +28,7 @@ export default class Database {
                 .then((DB) => { 
                     db = DB;
                     console.log('Database open');
-                    db.executeSql('SELECT * FROM users').then(() => {
+                    db.executeSql('SELECT 1 FROM users LIMIT 1').then(() => {
                         console.log('Database Ready');
                     }).catch((error) => {
                         console.log('Recieved Error', error);
@@ -90,7 +90,7 @@ export default class Database {
                 resolve(users);
               });
             }).then((result) => {
-              this.closeDatabase(db);
+              // this.closeDatabase(db);
             }).catch((err) => {
               console.log(err);
             });
@@ -105,6 +105,25 @@ export default class Database {
           this.initDB().then((db) => {
             db.transaction((tx) => {
               tx.executeSql('INSERT INTO users VALUES (?, ?)', [user.userId, user.userName]).then(([tx, results]) => {
+                resolve(results);
+              });
+            }).then((result) => {
+              this.closeDatabase(db);
+            }).catch((err) => {
+              console.log(err);
+            });
+          }).catch((err) => {
+            console.log(err);
+          });
+        });  
+      }
+
+      deleteProduct() {
+        return new Promise((resolve) => {
+          this.initDB().then((db) => {
+            db.transaction((tx) => {
+              tx.executeSql('DELETE FROM users').then(([tx, results]) => {
+                console.log(results, 'BERHASIL');
                 resolve(results);
               });
             }).then((result) => {
