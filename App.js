@@ -1,29 +1,28 @@
-//import liraries
-import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import React, {Component} from 'react';
+import 'react-native-gesture-handler';
+import { createAppContainer } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
+import User from "./src/screen/User";
+import Person from "./src/screen/Person";
+import AddUser from "./src/screen/AddUser";
 
-// create a component
-class MyClass extends Component {
-  render() {
-    let SQLite = require('react-native-sqlite-storage')
+const AppNavigator = createStackNavigator({
+    // HttpPerson : {screen: Person},
+    Users : {screen: User},
+    // Add : {screen: AddUser}
+},{
+    headerMode: 'none'
+})
 
-    return (
-      <View style={styles.container}>
-        <Text>MyClass</Text>
-      </View>
-    );
-  }
+
+const AppContainer = createAppContainer(AppNavigator)
+
+export default class App extends Component{
+    render(){
+        return (
+            <AppContainer/>
+        )
+    }
 }
 
-// define your styles
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#2c3e50',
-  },
-});
 
-//make this component available to the app
-export default MyClass;

@@ -1,20 +1,23 @@
 const baseURL = 'https://reqres.in/api/users'
 
 export async function users(){
-    const result = await fetch(baseURL, {method: 'GET'})
-        .then((response) => {
-            return response.json()
-        })
-        .catch((error) => console.log(error))
-        return result
+    try {
+        const result = await fetch(baseURL, { method: 'GET'});
+
+        return await result.json();
+    } catch (error) {
+        console.error(error);
+        return [];
+    }
 }
 
-export async function createUser(){
+export async function createUser(user){
     return await fetch(baseURL, {
         method: 'POST', 
         headers: {
-            Accept: 'application/json', "Content-Type" : 'application/json'
-        }
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(user),
     })
     .then( async (response) =>{
         if (response.status === 200) {
