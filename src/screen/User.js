@@ -71,13 +71,6 @@ class User extends Component {
   };
 
   render() {
-    // if (this.state.isLoading) {
-    //     return (
-    //         <View>
-    //             <ActivityIndicator size="large" color="#00000"/>
-    //         </View>
-    //     )
-    // }
     return (
       <>
       <Header>
@@ -90,7 +83,14 @@ class User extends Component {
       </View>
       <View style={{flex: 1}}>
         {/* <FlatList data={this.state.users} renderItem={this.renderItem} /> */}
-        <Text>LALALALAL</Text>
+        <View style={{flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
+        <View>
+          <Button title="Insert">Insert</Button>
+        </View>
+        <View>
+          <Button title="Insert">Insert</Button>
+        </View>
+        </View>
       </View>
       </>
     );
