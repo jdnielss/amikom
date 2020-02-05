@@ -1,9 +1,10 @@
 //import liraries
 import React, {Component} from 'react';
-import {View, Text, StyleSheet, Button, FlatList} from 'react-native';
+import {View, Text, StyleSheet, FlatList, Button} from 'react-native';
 import Database from '../database/database';
 import {ListItem} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/Ionicons';
+import {Header, Body, Title} from 'native-base';
 
 // create a component
 const db = new Database();
@@ -78,9 +79,20 @@ class User extends Component {
     //     )
     // }
     return (
-      <View>
+      <>
+      <Header>
+      <Body>
+        <Title>Http Request</Title>
+      </Body>
+      </Header>
+      <View style={{flex: 3}}>
         <FlatList data={this.state.users} renderItem={this.renderItem} />
       </View>
+      <View style={{flex: 1}}>
+        {/* <FlatList data={this.state.users} renderItem={this.renderItem} /> */}
+        <Text>LALALALAL</Text>
+      </View>
+      </>
     );
   }
 }

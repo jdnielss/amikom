@@ -8,7 +8,7 @@ import {
   ActivityIndicator,
   Button,
 } from 'react-native';
-import Header from '../components/header';
+import {Header, Body, Title} from 'native-base';
 import Axios from 'axios';
 import {TextInput} from 'react-native-gesture-handler';
 
@@ -63,7 +63,11 @@ export default () => {
 
   return (
     <SafeAreaView style={{flex: 1}}>
-      <Header title="HTTP Request" />
+      <Header>
+          <Body>
+            <Title>Http Request</Title>
+          </Body>
+      </Header>
       <FlatList
         data={people}
         keyExtractor={item => item.url}

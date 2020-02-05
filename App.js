@@ -9,7 +9,6 @@ import AddUser from './src/screen/AddUser';
 const AppNavigator = createStackNavigator(
   {
     HttpPerson: {screen: Person},
-    // Users : {screen: User},
     Add: {screen: AddUser},
     Users: {screen: User},
   },

@@ -2,6 +2,7 @@
 import React, {Component} from 'react';
 import {View, StyleSheet, TextInput, Button} from 'react-native';
 import Database from '../database/database';
+import {Header, Body, Title} from 'native-base';
 const db = new Database();
 // create a component
 class AddUser extends Component {
@@ -50,6 +51,11 @@ class AddUser extends Component {
   render() {
     return (
       <>
+      <Header>
+        <Body>
+          <Title>Insert Delete</Title>
+        </Body>
+      </Header>
         <View>
           <TextInput
             placeholder="Username"
