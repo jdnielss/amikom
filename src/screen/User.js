@@ -128,7 +128,7 @@ class User extends Component {
         </View>
       </View>
       <View style={{alignItems: 'center', margin: 10}}>
-        <Button title="QR Code" onPress={() => {this.props.navigation.navigate('QR_CODE')}}/>
+        <Button title="QR Code" onPress={() => {this.props.navigation.navigate('RootQR')}}/>
       </View>
       </>
     );

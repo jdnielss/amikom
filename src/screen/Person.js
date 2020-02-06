@@ -21,27 +21,10 @@ const action = () => {
   });
   const [responPost, setResponPost] = useState({});
 
-  // useEffect(() => {
-  //   // setLoading(true);
-  //   // Axios.get(`https://reqres.in/api/users`).then(res => {
-  //   //   setPeople([...res.data.data]);
-  //   //   setLoading(false);
-  //   //   console.warn(res.data.data)
-  //   // });
-  //   // // try {
-  //   // //   setLoading(true)
-  //   // //   const { data } = await Axios.get('https://reqres.in/api/users');
-  //   // //   setPeople([...data.data])
-  //   // // } catch (error) {
-  //   // //   setLoading(false)
-  //   // //   console.log(error)
-  //   // // }
-  // });
-
   const getUser = async () => {
     setLoading(true);
-    Axios.get(`https://reqres.in/api/users`).then(res => {
-      setPeople([...res.data.data]);
+    Axios.get(`https://reqres.in/api/users?id=2`).then(res => {
+      setPeople({...res.data.data});
       setLoading(false);
       console.warn(res.data.data)
     });
@@ -83,34 +66,19 @@ export default () => {
   } = action();
 
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <>
       <Header>
         <Body>
           <Title>Http Request</Title>
         </Body>
       </Header>
-      <FlatList
-        data={people}
-        keyExtractor={item => item.url}
-        renderItem={({item}) => (
-          <View style={{flexDirection: 'row', justifyContent: 'space-evenly'}}>
-            <Text>First Name: {item.first_name}</Text>
-            <Text>Last Name: {item.last_name}</Text>
-          </View>
-        )}
-        ListFooterComponent={
-          <View>
-            <TextInput placeholder="Ahmad" onChangeText={handleUsername} />
-            <Button style={{ margin: wp('10%')}}
-              title={loading ? 'post data' : 'sedang post'}
-              onPress={loadMore}
-            />
-           <Button onPress={getUser} title="GET"/>
-
-          </View>
-        }
-      />          
-
-    </SafeAreaView>
+        <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+          <Text>{people.first_name}</Text>
+        </View>
+        <View style={{flex: 1, alignItems: 'center', justifyContent: 'space-between', flexDirection: 'row', margin: 50}}>
+        <Button title="POST"  onPress={loadMore}/>
+        <Button title="GET"  onPress={getUser}/>
+        </View>
+    </>
   );
 };
