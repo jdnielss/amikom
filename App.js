@@ -7,13 +7,15 @@ import Person from './src/screen/Person';
 import AddUser from './src/screen/AddUser';
 import QRCode from "./src/screen/QRCode";
 import RootScreen from "./src/screen/RootScreen";
+import Scanner from "./src/screen/Scanner";
 const AppNavigator = createStackNavigator(
   {
     HttpPerson: {screen: Person},
     Add: {screen: AddUser},
     Users: {screen: User},
     ShowQR: {screen: QRCode},
-    RootQR: {screen: RootScreen}
+    RootQR: {screen: RootScreen},
+    ScannerQR: {screen: Scanner}
   },
   {
     headerMode: 'none',

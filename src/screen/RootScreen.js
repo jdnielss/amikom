@@ -15,7 +15,7 @@ export default class RootScreen extends Component {
         <Text>QR</Text>
       </View>
       <View style={styles.container}>
-        <Button onPress={() => this.props.navigation.navigate('Scan QR')} title="Scan QR"/>
+        <Button onPress={() => this.props.navigation.navigate('ScannerQR')} title="Scan QR"/>
       </View>
       <View style={styles.container}>
         <Button onPress={() => this.props.navigation.navigate('ShowQR')} title="Show QR"/>
