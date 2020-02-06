@@ -58,7 +58,6 @@ class User extends Component {
           users,
           isLoading: false,
         });
-        console.warn(user.length);
       })
       .catch(err => {
         console.log(err);

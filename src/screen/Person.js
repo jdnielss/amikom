@@ -85,9 +85,9 @@ export default () => {
   return (
     <SafeAreaView style={{flex: 1}}>
       <Header>
-          <Body>
-            <Title>Http Request</Title>
-          </Body>
+        <Body>
+          <Title>Http Request</Title>
+        </Body>
       </Header>
       <FlatList
         data={people}
