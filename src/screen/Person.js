@@ -11,34 +11,45 @@ import {
 import {Header, Body, Title} from 'native-base';
 import Axios from 'axios';
 import {TextInput} from 'react-native-gesture-handler';
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
 const action = () => {
   const [people, setPeople] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [dataPost, setDataPost] = useState({});
+  const [dataPost, setDataPost] = useState({
+    first_name: 'Ahmad', last_name: 'Dody'
+  });
   const [responPost, setResponPost] = useState({});
 
-  useEffect(async () => {
-    // setLoading(true);
-    // Axios.get(`https://reqres.in/api/users`).then(res => {
-    //   setPeople([...res.data.data]);
-    //   setLoading(false);
-    //   // console.warn(res.data.data)
-    // });
-    try {
-      setLoading(true)
-      const { data } = await Axios.get('https://reqres.in/api/users');
-      setPeople([...data.data])
-    } catch (error) {
-      setLoading(false)
-      console.log(error)
-    }
-  });
+  // useEffect(() => {
+  //   // setLoading(true);
+  //   // Axios.get(`https://reqres.in/api/users`).then(res => {
+  //   //   setPeople([...res.data.data]);
+  //   //   setLoading(false);
+  //   //   console.warn(res.data.data)
+  //   // });
+  //   // // try {
+  //   // //   setLoading(true)
+  //   // //   const { data } = await Axios.get('https://reqres.in/api/users');
+  //   // //   setPeople([...data.data])
+  //   // // } catch (error) {
+  //   // //   setLoading(false)
+  //   // //   console.log(error)
+  //   // // }
+  // });
 
+  const getUser = async () => {
+    setLoading(true);
+    Axios.get(`https://reqres.in/api/users`).then(res => {
+      setPeople([...res.data.data]);
+      setLoading(false);
+      console.warn(res.data.data)
+    });
+  }
   const loadMore = async () => {
     await setLoading(true);
     Axios.post('https://reqres.in/api/users', dataPost).then(res => {
-      alert(JSON.stringify(res.data));
+      alert(JSON.stringify(res.data.first_name));
       setLoading(false)
     });
   };
@@ -57,6 +68,7 @@ const action = () => {
     handleUsername,
     handleEmail,
     loadMore,
+    getUser
   };
 };
 
@@ -67,6 +79,7 @@ export default () => {
     handleUsername,
     handleEmail,
     loadMore,
+    getUser
   } = action();
 
   return (
@@ -87,15 +100,17 @@ export default () => {
         )}
         ListFooterComponent={
           <View>
-            <TextInput placeholder="nama" onChangeText={handleUsername} />
-            <TextInput placeholder="email" onChangeText={handleEmail} />
-            <Button
+            <TextInput placeholder="Ahmad" onChangeText={handleUsername} />
+            <Button style={{ margin: wp('10%')}}
               title={loading ? 'post data' : 'sedang post'}
               onPress={loadMore}
             />
+           <Button onPress={getUser} title="GET"/>
+
           </View>
         }
-      />
+      />          
+
     </SafeAreaView>
   );
 };
