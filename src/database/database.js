@@ -10,7 +10,22 @@ const database_size = 200000;
 
 
 export default class Database {
+  constructor() {
+    this.db;
+  }
     // Initial Database
+    async initDb() {
+      SQLite.openDatabase()
+        .then((db) => {
+
+        })
+        .catch();
+
+      await SQLite.echoTest();
+      const db = await SQLite.openDatabase();
+
+    }
+
     initDB(){
         let db;
         return new Promise((resolve, reject) => {

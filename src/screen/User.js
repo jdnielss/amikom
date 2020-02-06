@@ -1,10 +1,11 @@
 //import liraries
 import React, {Component} from 'react';
-import {View, Text, StyleSheet, FlatList, Button} from 'react-native';
+import {View, Text, StyleSheet, FlatList, Button, TextInput} from 'react-native';
 import Database from '../database/database';
 import {ListItem} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {Header, Body, Title} from 'native-base';
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
 // create a component
 const db = new Database();
@@ -15,13 +16,38 @@ class User extends Component {
     this.state = {
       isLoading: true,
       users: [],
+      userName: 'Ahmad',
     };
   }
 
   componentDidMount() {
     this.getUser();
-    this.deleteListUser();
   }
+
+  saveUser = async () => {
+    await this.setState({
+      isLoading: true,
+    });
+    let user = {
+      // userId: this.state.userId,
+      userName: this.state.userName,
+    };
+    for (let i = 1; i <= 500; i++) {
+      try {
+        user.userId = i;
+        const result = await db.createUser(user);
+        this.getUser()
+        if (result) {
+          this.setState({isLoading: false});
+        }
+      } catch (error) {
+        console.log(error);
+        this.setState({
+          isLoading: false,
+        });
+      }
+    }
+  };
 
   getUser() {
     let user = [];
@@ -48,8 +74,8 @@ class User extends Component {
     });
     db.deleteProduct()
       .then(result => {
+        this.getUser();
         console.log(result, 'DELETE');
-        //   this.props.navigation.goBack();
       })
       .catch(err => {
         console.log(err);
@@ -59,12 +85,19 @@ class User extends Component {
       });
   }
 
+  updateText = (text, field) => {
+    // this.state[field] = text;
+    console.log(text, 'Ke ganti');
+    this.setState({
+      [field]: text,
+    });
+  };
+
   renderItem = ({item, index}) => {
     return (
       <ListItem
         key={index}
         title={item.userName}
-        subtitle={item.userId}
         bottomDivider
       />
     );
@@ -75,22 +108,28 @@ class User extends Component {
       <>
       <Header>
       <Body>
-        <Title>Http Request</Title>
+        <Title>Insert Delete</Title>
       </Body>
       </Header>
-      <View style={{flex: 3}}>
+      <View>
+          <TextInput style={{ margin: 10}}
+            placeholder="Username"
+            value={this.state.userName}
+            onChangeText={text => this.updateText(text, 'userName')}
+            editable={false}
+          />
+        </View>
+      <View style={{flex: 4}}>
         <FlatList data={this.state.users} renderItem={this.renderItem} />
       </View>
       <View style={{flex: 1}}>
-        {/* <FlatList data={this.state.users} renderItem={this.renderItem} /> */}
-        <View style={{flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
-        <View>
-          <Button title="Insert">Insert</Button>
+        <View style={{flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', margin: wp('10%')}}>
+        <Button size="large" title="Insert Record" onPress={() => this.saveUser()} />
+        <Button title="Delete Record" onPress={() => this.deleteListUser()}/>
         </View>
-        <View>
-          <Button title="Insert">Insert</Button>
-        </View>
-        </View>
+      </View>
+      <View style={{alignItems: 'center', margin: 10}}>
+        <Button title="QR Code" onPress={() => {this.props.navigation.navigate('QR_CODE')}}/>
       </View>
       </>
     );
