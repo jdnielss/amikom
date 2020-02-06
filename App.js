@@ -15,7 +15,7 @@ const AppNavigator = createStackNavigator(
   },
   {
     headerMode: 'none',
-    initialRouteName: 'Users',
+    initialRouteName: 'HttpPerson',
   },
 );
 

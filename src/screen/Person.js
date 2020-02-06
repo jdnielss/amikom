@@ -18,28 +18,32 @@ const action = () => {
   const [dataPost, setDataPost] = useState({});
   const [responPost, setResponPost] = useState({});
 
-  useEffect(async () => {
+  useEffect(() => {
     // setLoading(true);
     // Axios.get(`https://reqres.in/api/users`).then(res => {
     //   setPeople([...res.data.data]);
     //   setLoading(false);
     //   // console.warn(res.data.data)
     // });
-    try {
-      setLoading(true)
-      const { data } = await Axios.get('https://reqres.in/api/users');
-      setPeople([...data.data])
-    } catch (error) {
-      setLoading(false)
-      console.log(error)
-    }
+    getData();
   });
 
-  const loadMore = async () => {
-    await setLoading(true);
+  const getData = async () => {
+    try {
+      setLoading(true);
+      const {data} = await Axios.get('https://reqres.in/api/users');
+      setPeople([...data.data]);
+    } catch (error) {
+      setLoading(false);
+      console.log(error);
+    }
+  };
+
+  const loadMore = () => {
+    setLoading(true);
     Axios.post('https://reqres.in/api/users', dataPost).then(res => {
       alert(JSON.stringify(res.data));
-      setLoading(false)
+      setLoading(false);
     });
   };
 
@@ -61,20 +65,14 @@ const action = () => {
 };
 
 export default () => {
-  const {
-    people,
-    loading,
-    handleUsername,
-    handleEmail,
-    loadMore,
-  } = action();
+  const {people, loading, handleUsername, handleEmail, loadMore} = action();
 
   return (
     <SafeAreaView style={{flex: 1}}>
       <Header>
-          <Body>
-            <Title>Http Request</Title>
-          </Body>
+        <Body>
+          <Title>Http Request</Title>
+        </Body>
       </Header>
       <FlatList
         data={people}
