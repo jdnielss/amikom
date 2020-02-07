@@ -11,7 +11,7 @@ const action = () => {
   const [people, setPeople] = useState([]);
   const [loading, setLoading] = useState(false);
   const [dataPost, setDataPost] = useState({
-    first_name: 'Ahmad', email: 'ahmad.ch@students.amikom.ac.id'
+    first_name: 'Ahmad', last_name: 'Dody'
   });
   const [responPost, setResponPost] = useState({});
 
@@ -69,10 +69,10 @@ export default () => {
         </Body>
       </Header>
         <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-          <Text>{responPost.first_name ? responPost.first_name : 'Data Kosong'} {responPost.email ? responPost.email : ''}</Text>
+          <Text>{responPost.first_name}</Text>
         </View>          
         <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-          <Text>{people.first_name ? people.first_name : 'Data Kosong'} {people.last_name ? people.last_name : ''}</Text>
+         <Text>{people.first_name}</Text>
         </View>    
 
         <View style={{flex: 1, alignItems: 'center', justifyContent: 'space-between', flexDirection: 'row', margin: 50}}>

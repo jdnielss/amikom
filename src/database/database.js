@@ -14,17 +14,17 @@ export default class Database {
     this.db;
   }
     // Initial Database
-    async initDb() {
-      SQLite.openDatabase()
-        .then((db) => {
+    // async initDb() {
+    //   SQLite.openDatabase()
+    //     .then((db) => {
 
-        })
-        .catch();
+    //     })
+    //     .catch();
 
-      await SQLite.echoTest();
-      const db = await SQLite.openDatabase();
+    //   await SQLite.echoTest();
+    //   const db = await SQLite.openDatabase();
 
-    }
+    // }
 
     initDB(){
         let db;
@@ -84,20 +84,39 @@ export default class Database {
         }
     }
 
-    async users(user) {
-        try {
-          const db = await this.initDB();
-          const trx = await db.transaction();
-          const result = await trx.executeSql('INSERT INTO users (userId, userName) VALUES (?, ?)', [user.userId, user.userName]);
-          return result;
-        } catch (error) {
-          console.log(error);
-        }
+     users() {
+        return new Promise((resolve) => {
+          const users = [];
+          this.initDB().then((db) => {
+            db.transaction((tx) => {
+              tx.executeSql('SELECT * FROM users', []).then(([tx,results]) => {
+                console.log("Query completed");
+                var len = results.rows.length;
+                for (let i = 0; i < len; i++) {
+                  let row = results.rows.item(i);
+                  const { userId, userName } = row;
+                  users.push({
+                    userId, userName
+                  });
+                }
+                console.log(users);
+                resolve(users);
+              });
+            }).then((result) => {
+              this.closeDatabase(db);
+            }).catch((err) => {
+              console.log(err);
+            });
+          }).catch((err) => {
+            console.log(err);
+          });
+        });  
       }
+    
 
     createUser(user) {
         return new Promise((resolve) => {
-          this.initDB().then((db) => {
+          this.inituDB().then((db) => {
             db.transaction((tx) => {
               tx.executeSql('INSERT INTO users VALUES (?, ?)', [user.userId, user.userName]).then(([tx, results]) => {
                 resolve(results);
