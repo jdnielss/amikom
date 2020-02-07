@@ -12,8 +12,7 @@ class Scanner extends Component {
     }
 
     sendData = (data) => {
-      // console.log(data, 'DAta QR')
-      this.props.navigation.navigate('RootQR', {dataQR: data})
+      this.props.navigation.navigate('RootQR', {dataQR: data.data})
     }
 
   render() {
