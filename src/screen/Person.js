@@ -32,7 +32,8 @@ const action = () => {
   const loadMore = async () => {
     await setLoading(true);
     Axios.post('https://reqres.in/api/users', dataPost).then(res => {
-      alert(JSON.stringify(res.data.first_name));
+      setResponPost({...res.data})
+      // alert(JSON.stringify(res.data.first_name));
       setLoading(false)
     });
   };
@@ -51,7 +52,8 @@ const action = () => {
     handleUsername,
     handleEmail,
     loadMore,
-    getUser
+    getUser, 
+    responPost
   };
 };
 
@@ -62,7 +64,8 @@ export default () => {
     handleUsername,
     handleEmail,
     loadMore,
-    getUser
+    getUser,
+    responPost
   } = action();
 
   return (
@@ -73,6 +76,7 @@ export default () => {
         </Body>
       </Header>
         <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+          <Text>{responPost.first_name}</Text>
           <Text>{people.first_name}</Text>
         </View>
         <View style={{flex: 1, alignItems: 'center', justifyContent: 'space-between', flexDirection: 'row', margin: 50}}>
