@@ -77,8 +77,11 @@ export default () => {
       </Header>
         <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
           <Text>{responPost.first_name}</Text>
-          <Text>{people.first_name}</Text>
-        </View>
+        </View>          
+        <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+         <Text>{people.first_name}</Text>
+        </View>    
+
         <View style={{flex: 1, alignItems: 'center', justifyContent: 'space-between', flexDirection: 'row', margin: 50}}>
         <Button title="POST"  onPress={loadMore}/>
         <Button title="GET"  onPress={getUser}/>
