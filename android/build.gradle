@@ -21,6 +21,12 @@ buildscript {
 
 allprojects {
     repositories {
+        configurations.all {
+          resolutionStrategy {
+           force 'com.google.android.gms:play-services-vision:11.8.0'
+            force 'com.google.android.gms:play-services-gcm:11.8.0'
+          }
+        }
         mavenLocal()
         maven {
             // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm

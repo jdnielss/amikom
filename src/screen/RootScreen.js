@@ -3,7 +3,31 @@ import { Text, View, StyleSheet, Button } from 'react-native'
 import {Header, Body, Title} from 'native-base';
 
 export default class RootScreen extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      result : ''
+    }
+  }
+
+  juan = () =>{
+    const res = this.props.navigation.getParam('dataQR');
+    console.log(res.data, 'lalalalalalalalala')
+    this.setState({
+      result : res.data
+    })
+  }
+  componentDidMount(){
+    this.juan();
+  }
+
   render() {
+    // console.log(this.props.navigation, 'Navigation aaaaa')
+    // const {params} = this.props.navigation.state
+
+    // console.log(params, 'JAJJAJJJAJA')
+      // console.log(this.props.navigation.getParam('dataQR'), 'DataQR')
+      // const result = this.props.navigation.getParam('dataQR')
     return (
       <>
       <Header>
@@ -12,7 +36,7 @@ export default class RootScreen extends Component {
         </Body>
       </Header>
       <View style={{alignItems: 'center', justifyContent: 'center', margin: 100}}>
-        <Text>QR</Text>
+        <Text>{this.state.result}</Text>
       </View>
       <View style={styles.container}>
         <Button onPress={() => this.props.navigation.navigate('ScannerQR')} title="Scan QR"/>
