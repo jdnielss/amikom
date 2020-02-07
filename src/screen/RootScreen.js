@@ -17,6 +17,8 @@ export default class RootScreen extends Component {
       result : res.data
     })
   }
+
+
   
   render() {
     return (

@@ -1,17 +1,11 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {
-  StyleSheet,
   Text,
   View,
-  FlatList,
-  SafeAreaView,
-  ActivityIndicator,
   Button,
 } from 'react-native';
 import {Header, Body, Title} from 'native-base';
 import Axios from 'axios';
-import {TextInput} from 'react-native-gesture-handler';
-import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
 const action = () => {
   const [people, setPeople] = useState([]);
@@ -33,7 +27,6 @@ const action = () => {
     await setLoading(true);
     Axios.post('https://reqres.in/api/users', dataPost).then(res => {
       setResponPost({...res.data})
-      // alert(JSON.stringify(res.data.first_name));
       setLoading(false)
     });
   };

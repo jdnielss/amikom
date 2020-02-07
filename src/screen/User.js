@@ -1,13 +1,10 @@
-//import liraries
 import React, {Component} from 'react';
 import {View, Text, StyleSheet, FlatList, Button, TextInput} from 'react-native';
 import Database from '../database/database';
 import {ListItem} from 'react-native-elements';
-import Icon from 'react-native-vector-icons/Ionicons';
 import {Header, Body, Title} from 'native-base';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
-// create a component
 const db = new Database();
 
 class User extends Component {
@@ -29,7 +26,6 @@ class User extends Component {
       isLoading: true,
     });
     let user = {
-      // userId: this.state.userId,
       userName: this.state.userName,
     };
     for (let i = 1; i <= 500; i++) {
@@ -67,7 +63,6 @@ class User extends Component {
       });
   }
   deleteListUser() {
-    // const { navigation } = this.props;
     this.setState({
       isLoading: true,
     });

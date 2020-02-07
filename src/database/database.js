@@ -84,35 +84,15 @@ export default class Database {
         }
     }
 
-    users() {
-        return new Promise((resolve) => {
-          const users = [];
-          this.initDB().then((db) => {
-            db.transaction((tx) => {
-              tx.executeSql('SELECT * FROM users', []).then(([tx,results]) => {
-                console.log("Query completed");
-                var len = results.rows.length;
-                for (let i = 0; i < len; i++) {
-                  let row = results.rows.item(i);
-                  console.log(`Prod ID: ${row.userId}, Prod Name: ${row.userName}`)
-                  const { userId, userName } = row;
-                  users.push({
-                    userId, 
-                    userName
-                  });
-                }
-                console.log(users);
-                resolve(users);
-              });
-            }).then((result) => {
-              // this.closeDatabase(db);
-            }).catch((err) => {
-              console.log(err);
-            });
-          }).catch((err) => {
-            console.log(err);
-          });
-        });  
+    async users(user) {
+        try {
+          const db = await this.initDB();
+          const trx = await db.transaction();
+          const result = await trx.executeSql('INSERT INTO users (userId, userName) VALUES (?, ?)', [user.userId, user.userName]);
+          return result;
+        } catch (error) {
+          console.log(error);
+        }
       }
 
     createUser(user) {
